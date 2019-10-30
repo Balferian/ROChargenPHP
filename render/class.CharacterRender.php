@@ -57,7 +57,7 @@ class CharacterRender extends RORender
 	/**
 	 * Public access
 	 */
-	public $body_animation = 0;
+	public $clothes_animation = 0;
 	public $doridori       = 0;
 
 
@@ -112,8 +112,8 @@ class CharacterRender extends RORender
 
 		// Draw body, get head position
 		$pos = $this->renderImage( $img, array(
-			"path" => DB::get_body_path( $view['class'], $view['sex'], $view['option'] ), 
-			"pal"  => DB::get_body_pal_path( $view['class'], $view['sex'], $view['clothes_color'] ),
+			"path" => DB::get_body_path( $view['class'], $view['sex'], $view['body'], $view['option'] ), 
+			"pal"  => DB::get_body_pal_path( $view['class'], $view['sex'], $view['clothes_color'], $view['body'] ),
 			"body" => true
 		));
 
@@ -134,8 +134,8 @@ class CharacterRender extends RORender
 
 		// Draw head
 		$this->renderImage( $img, array(
-			"path" => DB::get_head_path( $view['hair'], $view['sex'] ),
-			"pal"  => DB::get_head_pal_path( $view['hair'], $view['sex'], $view['hair_color'] ),
+			"path" => DB::get_head_path( $view['hair'], $view['sex'], $view['class'] ),
+			"pal"  => DB::get_head_pal_path( $view['hair'], $view['sex'], $view['hair_color'], $view['class'] ),
 			"pos"  => $pos,
 			"head" => true
 		));

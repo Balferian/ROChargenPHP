@@ -39,7 +39,7 @@ class MonsterRender extends RORender
 	/**
 	 * Public access
 	 */
-	public $body_animation = 0;
+	public $clothes_animation = 0;
 
 
 	/**
@@ -52,10 +52,10 @@ class MonsterRender extends RORender
 		$view = $this->param;
 
 		// Draw shadow
-		$this->renderImage( $img, array(
-			"path"  => "data/sprite/shadow",
-			"scale" => DB::get_shadow_factor($view['class'])
-		));
+		//$this->renderImage( $img, array(
+		//	"path"  => "data/sprite/shadow",
+		//	"scale" => DB::get_shadow_factor($view['class'])
+		//));
 
 		// Draw unit
 		$spr = DB::get_entity_path($view['class']);

@@ -72,7 +72,7 @@ class Avatar_Controller extends Controller {
 			FROM `char`
 			LEFT JOIN `login` ON login.account_id = char.account_id
 			LEFT JOIN `guild` ON guild.guild_id = char.guild_id
-			WHERE char.name = ?
+			WHERE char.char_id = ?
 			LIMIT 1",
 			array($pseudo)
 		);

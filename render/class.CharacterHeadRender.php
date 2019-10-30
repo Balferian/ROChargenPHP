@@ -20,6 +20,7 @@ class CharacterHeadRender extends RORender
 	 * Character options
 	 */
 	protected $param = array(
+		"class"         =>  0 ,
 		"sex"           => "M",
 		"hair"          =>  2 ,
 		"hair_color"    =>  0 ,
@@ -61,8 +62,8 @@ class CharacterHeadRender extends RORender
 
 		// Draw head
 		$this->renderImage( $img, array(
-			"path"      => DB::get_head_path( $view['hair'], $view['sex'] ),
-			"pal"       => DB::get_head_pal_path( $view['hair'], $view['sex'], $view['hair_color'] )
+			"path"      => DB::get_head_path( $view['hair'], $view['sex'], $view['class'] ),
+			"pal"       => DB::get_head_pal_path( $view['hair'], $view['sex'], $view['hair_color'], $view['class'] )
 		));
 
 		// Draw head top

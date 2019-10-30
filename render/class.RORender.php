@@ -54,7 +54,7 @@ abstract class RORender
 	 */
 	public $action            = 0;
 	public $direction         = 0;
-	protected $body_animation = 0;
+	protected $clothes_animation = 0;
 
 
 	/**

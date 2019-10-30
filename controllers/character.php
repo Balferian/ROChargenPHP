@@ -69,7 +69,7 @@ class Character_Controller extends Controller {
 				login.sex
 			FROM `char`
 			LEFT JOIN `login` ON login.account_id = char.account_id
-			WHERE char.name = ?
+			WHERE char.char_id = ?
 			LIMIT 1",
 			array($pseudo)
 		);
