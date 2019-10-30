@@ -133,14 +133,19 @@ abstract class RORender
 		// Use the same path
 		if ( !empty($param['path']) )
 		{
+			$spr_variations = array('.spr', '.Spr');
 			$file_spr = Client::getFile( $param['path'] . '.spr' );
+			if(!$file_spr)
+				$file_spr = Client::getFile( $param['path'] . '.Spr' );
 			$file_act = Client::getFile( $param['path'] . '.act' );
+			if(!$file_act)
+				$file_spr = Client::getFile( $param['path'] . '.Spr' );
 		}
 
 		// Use different act file (pet accessory for example)
 		else if ( !empty($param['spr']) && !empty($param['act']) )
 		{
-			if( $param['act'] === '.act' || $param['spr'] === '.spr' )
+			if( $param['act'] === '.act' || $param['spr'] === '.Spr' )
 				return;
 
 			$file_spr = Client::getFile( $param['spr'] );
