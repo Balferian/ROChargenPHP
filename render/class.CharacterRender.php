@@ -41,6 +41,7 @@ class CharacterRender extends RORender
 	protected $param = array(
 		"sex"           => "M",
 		"class"         =>  0 ,
+		"body"          =>  0 ,
 		"clothes_color" =>  0 ,
 		"hair"          =>  2 ,
 		"hair_color"    =>  0 ,
@@ -123,6 +124,13 @@ class CharacterRender extends RORender
 				"pos"   => $pos,
 				"robe"  => $view['robe']
 			));
+
+		// Draw body, get head position
+		$pos = $this->renderImage( $img, array(
+			"path" => DB::get_body_path( $view['class'], $view['sex'], $view['body'], $view['option'] ), 
+			"pal"  => DB::get_body_pal_path( $view['class'], $view['sex'], $view['clothes_color'], $view['body'] ),
+			"body" => true
+		));
 
 		// Draw head
 		$this->renderImage( $img, array(

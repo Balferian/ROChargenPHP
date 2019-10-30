@@ -21,7 +21,7 @@ class Generator_Controller extends Controller {
 	/**
 	 * Process entry
 	 */
-	public function process($sex, $jobid, $clothes_color, $hair, $hair_color, $doridori, $head_top, $head_mid, $head_bottom, $weapon, $shield, $robe, $option, $direction, $action, $animation )
+	public function process($sex, $jobid, $body, $clothes_color, $hair, $hair_color, $doridori, $head_top, $head_mid, $head_bottom, $weapon, $shield, $robe, $option, $direction, $action, $animation )
 	{
 		header('Content-type:image/png');
 		header('Cache-Control: max-age=30000, public');
@@ -36,6 +36,7 @@ class Generator_Controller extends Controller {
 
 		$chargen->sex            = $sex;
 		$chargen->class          = intval($jobid);
+		$chargen->body           = intval($body);
 		$chargen->clothes_color  = intval($clothes_color);
 
 		$chargen->hair           = intval($hair);

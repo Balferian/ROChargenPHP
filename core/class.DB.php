@@ -9,14 +9,14 @@
 final class DB
 {
 	static private $hair, $hats;
-	static private $body, $pals;
+	static private $clothes, $body, $pals;
 	static private $weapon, $shield, $robes = array();
 	static private $mobs, $pets;
 	static private $shadow;
 
 	static private $ascii_sex = array(
-		"M" => "\xb3\xb2",
-		"F" => "\xbf\xa9"
+		"M" => "남",
+		"F" => "여"
 	);
 
 	static public $path = "db/";
@@ -38,6 +38,8 @@ final class DB
 		else if( $id < 4000 ) return self::get_monster_path($id);
 		else if( $id < 6000 ) return false; // character
 		else if( $id < 7000 ) return self::get_homunculus_path($id);
+		else if( $id > 7000 && $id < 10000 ) return self::get_npc_path($id);
+		else if( $id > 20000 && $id < 30000 ) return self::get_monster_path($id);
 
 		return false;
 	}
@@ -88,20 +90,28 @@ final class DB
 	}
 
 	// Return body path
-	static public function get_body_path($id,$sex)
+	static public function get_body_path($id,$sex,$body)
 	{		
 		$sex = self::$ascii_sex[$sex];
 
-		// Load only if used
-		if( empty(self::$body) ) {
-			self::$body    = require_once( self::$path . 'body.php');
+			// Load only if used
+			if( empty(self::$clothes) ) {
+				self::$clothes    = require_once( self::$path . 'body.php');
+			}
+		if( $id == 4217 || $id == 4218 || $id == 4219 || $id == 4220 ) {
+			return "data/sprite/도람족/몸통/{$sex}/". self::$clothes[ isset(self::$clothes[$id]) ? $id : 0 ] ."_{$sex}";
+		}
+		if( $body == 1 ) {
+			return "data/sprite/인간족/몸통/{$sex}/costume_1/". self::$clothes[ isset(self::$clothes[$id]) ? $id : 0 ] ."_{$sex}_1";
+		}
+		else {
+			return "data/sprite/인간족/몸통/{$sex}/". self::$clothes[ isset(self::$clothes[$id]) ? $id : 0 ] ."_{$sex}";
 		}
 
-		return "data/sprite/\xc0\xce\xb0\xa3\xc1\xb7/\xb8\xf6\xc5\xeb/{$sex}/". self::$body[ isset(self::$body[$id]) ? $id : 0 ] ."_{$sex}";
 	}
 
 	// Return body pal path
-	static public function get_body_pal_path($id,$sex,$pal)
+	static public function get_body_pal_path($id,$sex,$pal,$body)
 	{
 		$sex = self::$ascii_sex[$sex];
 
@@ -109,15 +119,17 @@ final class DB
 			self::$pals    = require_once( self::$path . 'pals.php');
 		}
 
-		if ( $pal && isset(self::$pals[$id]) ) {
-			return "data/palette/\xb8\xf6/". self::$pals[$id] ."_{$sex}_{$pal}.pal";
+		if( $body == 1 ) {
+			return "data/palette/몸/costume_1/". self::$pals[$id] ."_{$sex}_{$pal}_1.pal";
 		}
-
+		if ( $pal && isset(self::$pals[$id]) ) {
+			return "data/palette/몸/". self::$pals[$id] ."_{$sex}_{$pal}.pal";
+		}
 		return false;
 	}
 
 	// Return head path
-	static public function get_head_path($id,$sex)  
+	static public function get_head_path($id,$sex,$job_id)  
 	{
 		$_sex = self::$ascii_sex[$sex];
 
@@ -129,7 +141,12 @@ final class DB
 
 		$id   = isset(self::$hair[$sex][$id]) ? self::$hair[$sex][$id] : 2;
 		*/
-		return "data/sprite/\xc0\xce\xb0\xa3\xc1\xb7/\xb8\xd3\xb8\xae\xc5\xeb/{$_sex}/{$id}_{$_sex}";
+		if( $id == 4217 || $id == 4218 || $id == 4219 || $id == 4220 ) {
+			return "data/sprite/도람족/머리통/{$_sex}/{$id}_{$_sex}";
+		}
+		else {
+			return "data/sprite/인간족/머리통/{$_sex}/{$id}_{$_sex}";
+		}
 	}
 
 	// Return head pal path
