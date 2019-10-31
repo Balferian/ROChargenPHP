@@ -133,7 +133,6 @@ abstract class RORender
 		// Use the same path
 		if ( !empty($param['path']) )
 		{
-			$spr_variations = array('.spr', '.Spr');
 			$file_spr = Client::getFile( $param['path'] . '.spr' );
 			if(!$file_spr)
 				$file_spr = Client::getFile( $param['path'] . '.Spr' );
